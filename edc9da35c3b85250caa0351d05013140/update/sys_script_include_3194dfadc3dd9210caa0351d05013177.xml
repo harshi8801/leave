@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_573896_lms.lmsAjax</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>lmsAjax</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var lmsAjax = Class.create();
+lmsAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+
+	getDateDiff: function()
+	{
+		var d1 = new GlideDate();
+		d1.setDispplayValue(this.getParameter('sysparm_start'));
+		d2.setDispplayValue(this.getParameter('sysparm_end'));
+
+		var duration = GlideDate.subtract(d1,d2);
+		return duration.getNumericValue();
+	},
+
+	getLeaveBucket : function()
+	{
+		var gr = new GlideRecord('x_573896_lms_leave_bucket');
+		gr.addQuery('employee',this.getParameter('sysparm_user'));
+		gr.addQuery('leave_type',this.getParameter('sysparm_leavetype'));
+		gr.query();
+		if(gr.next())
+		{
+			var leaveDetails = {};
+			leaveDetails.accured = '' + gr.accured;
+			leaveDetails.balance = '' + gr.balance;
+			leaveDetails.taken = '' + gr.taken;
+			return JSON.stringify(leaveDetails);
+
+
+		}
+
+	},
+
+    type: 'lmsAjax'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-10-17 11:17:48</sys_created_on>
+        <sys_id>3194dfadc3dd9210caa0351d05013177</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>lmsAjax</sys_name>
+        <sys_package display_value="Leave Management System " source="x_573896_lms">edc9da35c3b85250caa0351d05013140</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Leave Management System ">edc9da35c3b85250caa0351d05013140</sys_scope>
+        <sys_update_name>sys_script_include_3194dfadc3dd9210caa0351d05013177</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-21 13:55:35</sys_updated_on>
+    </sys_script_include>
+    <sys_es_latest_script action="INSERT_OR_UPDATE">
+        <id>3194dfadc3dd9210caa0351d05013177</id>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2024-10-17 11:17:47</sys_created_on>
+        <sys_id>81c4172dc39d9210caa0351d0501311d</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2024-10-17 11:17:47</sys_updated_on>
+        <table>sys_script_include</table>
+        <use_es_latest>true</use_es_latest>
+    </sys_es_latest_script>
+</record_update>
